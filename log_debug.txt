@@ -1,9 +1,0 @@
-05/12/2016 12:25:22 | Temperature: 5.0°C | Humidity: 0%
-05/12/2016 12:25:27 | Temperature: 5.0°C | Humidity: 10%
-05/12/2016 12:25:32 | Temperature: 5.0°C | Humidity: 11%
-05/12/2016 12:25:37 | Temperature: 5.0°C | Humidity: 11%
-05/12/2016 12:25:42 | Temperature: 5.0°C | Humidity: 11%
-05/12/2016 12:25:47 | Temperature: 5.0°C | Humidity: 11%
-05/12/2016 12:25:52 | Temperature: 5.0°C | Humidity: 11%
-05/12/2016 12:25:58 | Temperature: 7.0°C | Humidity: 11%
-05/12/2016 12:26:08 | Temperature: 8.0°C | Humidity: 11%
