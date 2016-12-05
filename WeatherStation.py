@@ -49,9 +49,9 @@ class WeatherStation(QObject):
         self.window.btnCollectOn.setEnabled(onEnabled)
         self.window.btnCollectOff.setEnabled(offEnabled)
 
-    def update_lcd(self, tempValue, humValue):
-        self.window.lcdTemperature.display(tempValue)
-        self.window.lcdHumidity.display(humValue)
+    def update_lcd(self, temperature, humidity):
+        self.window.lcdTemperature.display(temperature)
+        self.window.lcdHumidity.display(humidity)
 
     def update_debug_status(self):
         if self.window.checkDebug.isChecked() == True:
