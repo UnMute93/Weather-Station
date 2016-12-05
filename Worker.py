@@ -1,7 +1,7 @@
 import time
 
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
-#from sense_hat import SenseHat
+from sense_hat import SenseHat
 
 
 class Worker(QObject):
@@ -16,16 +16,16 @@ class Worker(QObject):
         self.temperature = 0
         self.humidity = 0
         self.interval = 5
-        #self.sense = SenseHat()
+        self.sense = SenseHat()
         self.debugMode = False
 
     @pyqtSlot()
     def start(self):
         self.updateButtons.emit(False, True)
         while True:
-            #if self.debugMode == False:
-            #    self.temperature = self.sense.get_temperature()
-            #    self.humidity = self.sense.get_humidity()
+            if self.debugMode == False:
+                self.temperature = self.sense.get_temperature()
+                self.humidity = self.sense.get_humidity()
 
             self.updateLcd.emit(self.temperature, self.humidity)
             self.show_temperature_on_led_matrix(self.temperature)
@@ -61,4 +61,4 @@ class Worker(QObject):
 
     def show_temperature_on_led_matrix(self, temperature):
         temperatureString = "{:.1f}".format(temperature)
-        #self.sense.show_message(temperatureString + "c")
+        self.sense.show_message(temperatureString + "c")
