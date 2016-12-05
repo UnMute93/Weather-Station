@@ -29,12 +29,18 @@ class WeatherStation(QObject):
         self.window.btnCollectOn.clicked.connect(self.worker.start)
         self.window.btnCollectOff.clicked.connect(self.worker_reset)
 
+        self.parent().aboutToQuit.connect(self.worker_quit)
+
         self.worker.updateButtons.connect(self.update_buttons)
         self.worker.updateLcd.connect(self.update_lcd)
 
     def worker_reset(self):
         if self.worker_thread.isRunning():
             self.update_buttons(True, False)
+            self.worker.stop()
+
+    def worker_quit(self):
+        if self.worker_thread.isRunning():
             self.worker.stop()
 
     def update_buttons(self, onEnabled, offEnabled):

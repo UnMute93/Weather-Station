@@ -39,7 +39,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeatherStation.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WeatherStation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WeatherStation.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -54,18 +54,18 @@
       <file leaf-file-name="ui_weather_station.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui_weather_station.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Worker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Worker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-30">
-              <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+            <state relative-caret-position="-132">
+              <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
               <folding>
                 <element signature="e#25#36#0" expanded="true" />
               </folding>
@@ -89,9 +89,9 @@
         <option value="$PROJECT_DIR$/weather_station.py" />
         <option value="$PROJECT_DIR$/ui_weather_station.py" />
         <option value="$PROJECT_DIR$/Worker.py" />
-        <option value="$PROJECT_DIR$/WeatherStation.py" />
         <option value="$PROJECT_DIR$/MainWindow.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/WeatherStation.py" />
       </list>
     </option>
   </component>
@@ -492,16 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WeatherStation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="e#25#78#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -512,20 +502,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Worker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-132">
+          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#25#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ui_weather_station.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Worker.py">
+    <entry file="file://$PROJECT_DIR$/WeatherStation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
+        <state relative-caret-position="0">
           <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
           <folding>
-            <element signature="e#25#36#0" expanded="true" />
+            <element signature="e#25#78#0" expanded="true" />
           </folding>
         </state>
       </provider>
