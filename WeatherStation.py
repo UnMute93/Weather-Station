@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 
 from MainWindow import MainWindow
@@ -27,23 +29,13 @@ class WeatherStation(QObject):
         self.window.btnCollectOn.clicked.connect(self.worker.start)
         self.window.btnCollectOff.clicked.connect(self.worker_reset)
 
-        self.parent().aboutToQuit.connect(self.worker_quit)
-
         self.worker.updateButtons.connect(self.update_buttons)
         self.worker.updateLcd.connect(self.update_lcd)
 
     def worker_reset(self):
         if self.worker_thread.isRunning():
-            self.worker_thread.terminate()
-            self.worker_thread.wait()
-            self.signalStatus.emit('Idle.')
-            self.worker_thread.start()
             self.update_buttons(True, False)
-
-    def worker_quit(self):
-        if self.worker_thread.isRunning():
-            self.worker_thread.terminate()
-            self.worker_thread.wait()
+            self.worker.stop()
 
     def update_buttons(self, onEnabled, offEnabled):
         self.window.btnCollectOn.setEnabled(onEnabled)

@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import time
+import threading
 
 from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
 from sense_hat import SenseHat
@@ -18,11 +21,13 @@ class Worker(QObject):
         self.interval = 5
         self.sense = SenseHat()
         self.debugMode = False
+        self.stopEvent = threading.Event()
 
     @pyqtSlot()
     def start(self):
         self.updateButtons.emit(False, True)
-        while True:
+        self.stopEvent.clear()
+        while not self.stopEvent.is_set():
             if self.debugMode == False:
                 self.temperature = self.sense.get_temperature()
                 self.humidity = self.sense.get_humidity()
@@ -30,7 +35,10 @@ class Worker(QObject):
             self.updateLcd.emit(self.temperature, self.humidity)
             self.show_temperature_on_led_matrix(self.temperature)
             self.log_to_file(self.temperature, self.humidity, self.filename)
-            time.sleep(self.interval)
+            self.stopEvent.wait(timeout=(self.interval))
+
+    def stop(self):
+        self.stopEvent.set()
 
     def update_temperature(self, value):
         if self.debugMode == True:
