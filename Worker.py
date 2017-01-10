@@ -13,11 +13,14 @@ class Worker(QObject):
     updateButtons = pyqtSignal(bool, bool)
     updateLcd = pyqtSignal(float, float)
 
+    sense.set_imu_config(False, False, True)
+
     def __init__(self, parent=None):
         super(self.__class__, self).__init__(parent)
         self.filename = "log.txt"
         self.temperature = 0
         self.humidity = 0
+        self.pressure = 0
         self.interval = 5
         self.sense = SenseHat()
         self.debugMode = False
@@ -28,13 +31,15 @@ class Worker(QObject):
         self.updateButtons.emit(False, True)
         self.stopEvent.clear()
         while not self.stopEvent.is_set():
+            self.rotate_display()
             if self.debugMode == False:
                 self.temperature = self.sense.get_temperature()
                 self.humidity = self.sense.get_humidity()
+                self.pressure = self.sense.get_pressure()
 
-            self.updateLcd.emit(self.temperature, self.humidity)
+            self.updateLcd.emit(self.temperature, self.humidity, self.pressure)
             self.show_temperature_on_led_matrix(self.temperature)
-            self.log_to_file(self.temperature, self.humidity, self.filename)
+            self.log_to_file(self.temperature, self.humidity, self.pressure, self.filename)
             self.stopEvent.wait(timeout=(self.interval))
 
     def stop(self):
@@ -48,6 +53,10 @@ class Worker(QObject):
         if self.debugMode == True:
             self.humidity = value
 
+    def update_pressure(self, value):
+        if self.debugMode == True:
+            self.pressure = value
+
     def update_interval(self, value):
         self.interval = value
 
@@ -58,15 +67,20 @@ class Worker(QObject):
         else:
             self.filename = "log.txt"
 
-    def log_to_file(self, temperature, humidity, filename):
+    def log_to_file(self, temperature, humidity, pressure, filename):
         temperatureString = "{:.1f}°C".format(temperature)
         humidityString = "{:.0f}%".format(humidity)
+        pressureString = "{:.0f}mbar".format(pressure)
         timeString = time.strftime("%d/%m/%Y %H:%M:%S")
         file = open(filename, "a")
         file.write(timeString + " | " + "Temperature: " + temperatureString + " | " + "Humidity: " + humidityString
-                   + "\n")
+                   + " | " + pressureString + "\n")
         file.close()
 
     def show_temperature_on_led_matrix(self, temperature):
         temperatureString = "{:.1f}".format(temperature)
         self.sense.show_message(temperatureString + "c")
+
+    def rotate_display(self):
+        x = round(sense.get_accelerometer_raw()['x'], 0)
+        # TODO Rotera display efter hur Pi roteras.

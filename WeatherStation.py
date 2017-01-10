@@ -24,6 +24,7 @@ class WeatherStation(QObject):
     def connect_signals(self):
         self.window.dbmTemperature.valueChanged.connect(self.worker.update_temperature)
         self.window.dbmHumidity.valueChanged.connect(self.worker.update_humidity)
+        self.window.dbmPressure.valueChanged.connect(self.worker.update_pressure)
         self.window.dbmInterval.valueChanged.connect(self.worker.update_interval)
         self.window.checkDebug.stateChanged.connect(self.update_debug_status)
         self.window.btnCollectOn.clicked.connect(self.worker.start)
@@ -47,9 +48,10 @@ class WeatherStation(QObject):
         self.window.btnCollectOn.setEnabled(onEnabled)
         self.window.btnCollectOff.setEnabled(offEnabled)
 
-    def update_lcd(self, temperature, humidity):
+    def update_lcd(self, temperature, humidity, pressure):
         self.window.lcdTemperature.display(temperature)
         self.window.lcdHumidity.display(humidity)
+        self.window.lcdPressure.display(pressure)
 
     def update_debug_status(self):
         if self.window.checkDebug.isChecked() == True:
