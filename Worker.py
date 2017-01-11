@@ -30,7 +30,7 @@ class Worker(QObject):
         self.updateButtons.emit(False, True)
         self.stopEvent.clear()
         while not self.stopEvent.is_set():
-            #self.rotate_display()
+            self.rotate_display()
             if self.debugMode == False:
                 self.temperature = self.sense.get_temperature()
                 self.humidity = self.sense.get_humidity()
@@ -81,6 +81,16 @@ class Worker(QObject):
         temperatureString = "{:.1f}".format(temperature)
         self.sense.show_message(temperatureString + "c")
 
-    #def rotate_display(self):
-    #    x = round(sense.get_accelerometer_raw()['x'], 0)
-        # TODO Rotera display efter hur Pi roteras.
+    def rotate_display(self):
+        x = round(self.sense.get_accelerometer_raw()['x'], 0)
+        y = round(self.sense.get_accelerometer_raw()['y'], 0)
+
+        rotation = 0
+        if x == -1:
+            rotation = 90
+        elif y == -1:
+            rotation = 180
+        elif x == 1:
+            rotation = 270
+
+        self.sense.set_rotation(rotation)
