@@ -77,9 +77,25 @@ class Worker(QObject):
                    + " | " + "Pressure: " + pressureString + "\n")
         file.close()
 
-    def show_temperature_on_led_matrix(self, temperature):
-        temperatureString = "{:.1f}".format(temperature)
-        self.sense.show_message(temperatureString + "c")
+    def show_temperature_on_led_matrix(self, temp):
+        positiveDegreeValue = 255 - temp * 5
+        negativeDegreeValue = 255 + temp * 5
+
+        if temp >= 0 and temp < 50:
+            tempGrade = (255, positiveDegreeValue, positiveDegreeValue)
+
+        elif temp < 0 and temp > -50:
+            tempGrade = (negativeDegreeValue, negativeDegreeValue, 255)
+
+        elif temp >= 50:
+            tempGrade = (255, 0, 0)
+
+        elif temp <= -50:
+            tempGrade = (0, 0, 255)
+
+        tempToString = "{:.1f}".format(temp)
+
+        self.sense.show_message(tempToString + "c", back_colour=[0, 0, 0], text_colour=tempGrade)
 
     def rotate_display(self):
         x = round(self.sense.get_accelerometer_raw()['x'], 0)
