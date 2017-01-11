@@ -8,12 +8,10 @@ from sense_hat import SenseHat
 
 
 class Worker(QObject):
-
     signalStatus = pyqtSignal(str)
     updateButtons = pyqtSignal(bool, bool)
-    updateLcd = pyqtSignal(float, float)
-
-    sense.set_imu_config(False, False, True)
+    updateLcd = pyqtSignal(float, float, float)
+    updateGraphs = pyqtSignal(float, float, float, float)
 
     def __init__(self, parent=None):
         super(self.__class__, self).__init__(parent)
@@ -23,6 +21,7 @@ class Worker(QObject):
         self.pressure = 0
         self.interval = 5
         self.sense = SenseHat()
+        self.sense.set_imu_config(False, False, True)
         self.debugMode = False
         self.stopEvent = threading.Event()
 
@@ -31,13 +30,14 @@ class Worker(QObject):
         self.updateButtons.emit(False, True)
         self.stopEvent.clear()
         while not self.stopEvent.is_set():
-            self.rotate_display()
+            #self.rotate_display()
             if self.debugMode == False:
                 self.temperature = self.sense.get_temperature()
                 self.humidity = self.sense.get_humidity()
                 self.pressure = self.sense.get_pressure()
 
             self.updateLcd.emit(self.temperature, self.humidity, self.pressure)
+            self.updateGraphs.emit(self.temperature, self.humidity, self.pressure, self.interval)
             self.show_temperature_on_led_matrix(self.temperature)
             self.log_to_file(self.temperature, self.humidity, self.pressure, self.filename)
             self.stopEvent.wait(timeout=(self.interval))
@@ -74,13 +74,13 @@ class Worker(QObject):
         timeString = time.strftime("%d/%m/%Y %H:%M:%S")
         file = open(filename, "a")
         file.write(timeString + " | " + "Temperature: " + temperatureString + " | " + "Humidity: " + humidityString
-                   + " | " + pressureString + "\n")
+                   + " | " + "Pressure: " + pressureString + "\n")
         file.close()
 
     def show_temperature_on_led_matrix(self, temperature):
         temperatureString = "{:.1f}".format(temperature)
         self.sense.show_message(temperatureString + "c")
 
-    def rotate_display(self):
-        x = round(sense.get_accelerometer_raw()['x'], 0)
+    #def rotate_display(self):
+    #    x = round(sense.get_accelerometer_raw()['x'], 0)
         # TODO Rotera display efter hur Pi roteras.

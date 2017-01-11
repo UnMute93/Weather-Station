@@ -34,6 +34,7 @@ class WeatherStation(QObject):
 
         self.worker.updateButtons.connect(self.update_buttons)
         self.worker.updateLcd.connect(self.update_lcd)
+        self.worker.updateGraphs.connect(self.update_graphs)
 
     def worker_reset(self):
         if self.worker_thread.isRunning():
@@ -58,3 +59,8 @@ class WeatherStation(QObject):
             self.worker.update_debug_mode(True)
         else:
             self.worker.update_debug_mode(False)
+
+    def update_graphs(self, temperature, humidity, pressure, time):
+        self.window.temperatureGraph.update_figure(temperature, time)
+        self.window.humidityGraph.update_figure(humidity, time)
+        self.window.pressureGraph.update_figure(pressure, time)
